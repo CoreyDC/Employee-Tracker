@@ -1,9 +1,17 @@
-// BRINGING IN DEPENDENCIES TO SERVER
+// BRINGING IN PACKAGES TO SERVER
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consoleTable = require('console.table');
 require('dotenv').config(); 
-const database = require('./db/database');
+const db = require('./db/database');
+
+// BRINGING IN UTILS TO SERVER
+const viewDepartments = require('./utils/view_departments');
+
+// CHECKING DB ERROR
+db.connect((err) => {
+    if (err) throw err;
+});
 
 // CALLING FUNCTION TO INITIALIZE PROGRAM
 init();
@@ -23,7 +31,11 @@ inquirer.prompt(userPrompts)
     .then(res => {
         switch(res.choices) {
             case 'View all Departments':
-                console.log('yaaaaay');
+                viewDepartments;
+                break;
+            
+            case 'Exit':
+                process.exit();
                 break;
         }
     });
