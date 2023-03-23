@@ -9,4 +9,4 @@ const viewDepartments = () => {
     })
 };
 
-module.exports = viewDepartments;
+module.exports = { viewDepartments };
