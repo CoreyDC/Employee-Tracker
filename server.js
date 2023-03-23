@@ -7,18 +7,21 @@ const db = require('./db/database');
 
 // BRINGING IN UTILS TO SERVER
 const { viewDepartments } = require('./utils/view_departments');
+const { viewRoles } = require('./utils/view_roles');
+const { viewEmployees } = require('./utils/view_employees');
 const { addDepartment } = require('./utils/add_department');
+const { addRole } = require('./utils/add_role');
+const { addEmployee } = require('./utils/add_employee')
 
 // CHECKING DB ERROR
 db.connect((err) => {
     if (err) throw err;
+
+    init();
 });
 
-// CALLING FUNCTION TO INITIALIZE PROGRAM
-init();
-
 // INITIAL FUNCTION TO PROMPT USER TO SELECT AN OPTION
-function init() {
+const init = () => {
     const userPrompts = 
         {
             type: "list",
@@ -27,18 +30,34 @@ function init() {
             choices: ["View all Departments", "View all Roles", "View all Employees", "Add a Department", "Add a Role", "Add an Employee", "Update an employee role", "Exit"]
         }
 
+
+
 // RESPONSE BASED ON USER CHOICE
 inquirer.prompt(userPrompts)
     .then(res => {
         switch(res.choices) {
             case 'View all Departments':
                 viewDepartments();
-                return init();
+                break;
+
+            case 'View all Roles':
+                viewRoles();
+                break;
+
+            case 'View all Employees':
+                viewEmployees();
                 break;
 
             case 'Add a Department':
                 addDepartment();
-                return init();
+                break;
+
+            case 'Add a Role':
+                addRole();
+                break; 
+
+            case 'Add an Employee':
+                addEmployee();
                 break;
             
             case 'Exit':
@@ -48,4 +67,5 @@ inquirer.prompt(userPrompts)
     });
 };
 
+module.exports = { init };
 

@@ -1,13 +1,15 @@
-// BRINGING IN DB AND INQUIRER
+// BRINGING IN DB, INQUIRER AND VIEWDEPARTMENTS FUNCTION
 const db = require('../db/database');
 const inquirer = require('inquirer');
+const { viewDepartments } = require('./view_departments');
 
 // FUNCTION TO ADD DEPARTMENT
 const addDepartment = () => {
     const newDepPrompt = 
     {
+        type: 'input',
+        name: 'department_name',
         message: 'New Department Name: ',
-        name: 'department_name'
     }
 
     inquirer.prompt(newDepPrompt)
@@ -16,6 +18,8 @@ const addDepartment = () => {
                 if (err) throw err;
                 console.table(res);
             });
+
+            viewDepartments();
         })
 };
 
