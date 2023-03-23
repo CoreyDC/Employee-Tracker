@@ -6,7 +6,8 @@ require('dotenv').config();
 const db = require('./db/database');
 
 // BRINGING IN UTILS TO SERVER
-const viewDepartments = require('./utils/view_departments');
+const { viewDepartments } = require('./utils/view_departments');
+const { addDepartment } = require('./utils/add_department');
 
 // CHECKING DB ERROR
 db.connect((err) => {
@@ -31,7 +32,13 @@ inquirer.prompt(userPrompts)
     .then(res => {
         switch(res.choices) {
             case 'View all Departments':
-                viewDepartments;
+                viewDepartments();
+                return init();
+                break;
+
+            case 'Add a Department':
+                addDepartment();
+                return init();
                 break;
             
             case 'Exit':
@@ -40,3 +47,5 @@ inquirer.prompt(userPrompts)
         }
     });
 };
+
+
