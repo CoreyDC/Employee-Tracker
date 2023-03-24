@@ -1,5 +1,6 @@
 // BRINGING IN DB
 const db = require('../db/database');
+const { init } = require('../utils/index');
 
 // FUNCTION TO VIEW DEPARTMENTS
 const viewDepartments = () => {
